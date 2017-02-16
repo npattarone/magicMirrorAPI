@@ -1,0 +1,51 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html ng-app="MagicMirrorApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/app/app.js"></script>
+    <script src="~/app/controllers/productController.js"></script>
+    <script src="~/app/services/productService.js"></script>
+
+</head>
+<body ng-controller="magicMirrorController">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand  mm-header" href="#">
+                    MAGIC MIRROR <small>by</small>
+                    <img class="mm-brand" alt="Kevingston" src="~/Content/images/kevingston.jpg">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="container body-content" style="margin-top: 5%;">
+        @RenderBody()
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-bottom" style="height: 5%;">
+        <div class="container">
+
+        </div>
+    </div>
+</body>
+</html>
