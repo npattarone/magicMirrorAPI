@@ -36,9 +36,9 @@ namespace SmartRetail.MagicMirror.SignalR.API.Performance
         {
             var list = new List<ProductModel>()
             {
-                new ProductModel() { Description ="REMERA ESCOTE V", ExternalCode = "REMV005" },
-                new ProductModel() { Description ="POLLERA LARGA FIT", ExternalCode = "POLFIT895" },
-                new ProductModel() { Description ="COLLAR PERLAS", ExternalCode = "COLPER01" }
+                new ProductModel() { Description ="REMERA ESCOTE V", ExternalCode = "REMV005", Id = "69871" },
+                new ProductModel() { Description ="POLLERA LARGA FIT", ExternalCode = "POLFIT895" , Id = "7963"},
+                new ProductModel() { Description ="COLLAR PERLAS", ExternalCode = "COLPER01", Id = "876523" }
             };
             //Monitor for infinity!
             while (true)
@@ -58,7 +58,8 @@ namespace SmartRetail.MagicMirror.SignalR.API.Performance
                                 performanceModels.Add(new ProductModel
                                 {
                                     Description = "REMERA ESCOTE V",
-                                    ExternalCode = "REMV005"
+                                    ExternalCode = "REMV005",
+                                    Id = "69871"
 
                                 });
                                 break;
@@ -66,7 +67,17 @@ namespace SmartRetail.MagicMirror.SignalR.API.Performance
                                 performanceModels.Add(new ProductModel
                                 {
                                     Description = "COLLAR PERLAS",
-                                    ExternalCode = "COLPER01"
+                                    ExternalCode = "COLPER01",
+                                    Id = "876523"
+
+                                });
+                                break;
+                            case "POLLERA LARGA FIT":
+                                performanceModels.Add(new ProductModel
+                                {
+                                    Description = "POLLERA LARGA FIT",
+                                    ExternalCode = "POLFIT895",
+                                    Id = "7963"
 
                                 });
                                 break;
