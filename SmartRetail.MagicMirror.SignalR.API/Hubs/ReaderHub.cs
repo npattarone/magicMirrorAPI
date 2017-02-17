@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 using SmartRetail.MagicMirror.SignalR.API.Models;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace SmartRetail.MagicMirror.SignalR.API.Hubs
 {
@@ -17,7 +18,7 @@ namespace SmartRetail.MagicMirror.SignalR.API.Hubs
 
         public void SendPerformance(IList<ProductModel> productModels)
         {
-            Clients.All.broadcast(productModels);
+            Clients.All.broadcastPerformance(productModels);
         }
 
         public void Communicate(string messageId, string message)

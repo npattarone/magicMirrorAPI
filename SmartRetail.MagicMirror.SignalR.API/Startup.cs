@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.AspNet.SignalR;
-using SmartRetail.MagicMirror.SignalR.API.Performance;
 using Microsoft.Owin.Cors;
 using SmartRetail.MagicMirror.SignalR.API.Hubs;
 using System;
 using SmartRetail.MagicMirror.SignalR.API.Models;
 using System.Collections.Generic;
+using SmartRetail.MagicMirror.SignalR.API.Performance;
+using System.Threading.Tasks;
 
 [assembly: OwinStartup(typeof(SmartRetail.MagicMirror.SignalR.API.Startup))]
 
@@ -17,25 +17,22 @@ namespace SmartRetail.MagicMirror.SignalR.API
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCors(CorsOptions.AllowAll);
-            var hubConfiguration = new HubConfiguration();
-            hubConfiguration.EnableDetailedErrors = true;
-            app.MapSignalR(hubConfiguration);
+            // Branch the pipeline here for requests that start with "/signalr"
+            app.Map("/signalr", map =>
+            {
+                map.UseCors(CorsOptions.AllowAll);
+                var hubConfiguration = new HubConfiguration
+                {
+                    EnableDetailedErrors = true,
+                    EnableJSONP = true
+                };
+               
+                map.RunSignalR(hubConfiguration);
 
+                var performanceEngine = new PerformanceEngine(800);
+                Task.Factory.StartNew(async () => await performanceEngine.OnPerformanceReader());
 
-            var performanceEngine = new PerformanceEngine(800);
-            Task.Factory.StartNew(async () => await performanceEngine.OnPerformanceReader());
-
-            //var hub = GlobalHost.ConnectionManager.GetHubContext<ReaderHub>();
-            //var list = new List<ProductModel>()
-            //{
-            //    new ProductModel() { Description ="REMERA ESCOTE V", ExternalCode = "REMV005" },
-            //    new ProductModel() { Description ="POLLERA LARGA FIT", ExternalCode = "POLFIT895" },
-            //    new ProductModel() { Description ="COLLAR PERLAS", ExternalCode = "COLPER01" }
-            //};
-
-            //hub.Clients.All.broadcastPerformance(list);
-            //hub.Clients.All.serverTime(DateTime.UtcNow.ToString());
+            });
         }
     }
 }

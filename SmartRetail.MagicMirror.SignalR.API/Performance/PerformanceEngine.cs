@@ -80,7 +80,7 @@ namespace SmartRetail.MagicMirror.SignalR.API.Performance
                     }
                 }
 
-                _hubs.Clients.All.broadcast(performanceModels);
+                _hubs.Clients.All.broadcastPerformance(performanceModels);
                 _hubs.Clients.All.serverTime(DateTime.UtcNow.ToString());
             }
         }
